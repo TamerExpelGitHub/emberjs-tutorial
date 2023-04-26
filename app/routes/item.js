@@ -1,8 +1,20 @@
 import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
 
 export default class ItemRoute extends Route {
-  model(params) {
+  @service store;
+
+  async model(params) {
     const { item_id } = params;
-    return item_id;
+    const data = await this.store.findAll('product');
+    // console.log('products:', data);
+    const product = data.find(({ id }) => id === item_id);
+    // console.log('Product:', product);
+    return product;
+  }
+
+  setupController(controller, model) {
+    super.setupController(controller, model);
+    controller.color = model.colors[0].color;
   }
 }

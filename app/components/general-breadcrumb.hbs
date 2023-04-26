@@ -1,0 +1,10 @@
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <LinkTo @route="index">
+        Home
+      </LinkTo>
+    </li>
+    {{#if @path}}
+      <li class="breadcrumb-item">{{@path}}</li>
+    {{/if}}
+  </ol>

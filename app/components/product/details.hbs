@@ -1,7 +1,7 @@
 <div class="product-details">
     {{!-- Header --}}
     <section>
-      <h3>Beats Solo Wireless Headphones</h3>
+      <h3>{{@name}}</h3>
       <div class="text-warning">
         <i class="fa fa-star"></i>
         <i class="fa fa-star"></i>
@@ -12,17 +12,31 @@
     </section>
 
     {{!-- Price --}}
-    <section>
-      <del class="small text-black-50">$199.95</del>
-      <i class="text-danger font-weight-bold">$99.98</i>
+    <section class={{unless @isDetails 'h4'}}>
+      {{!-- @price is passed from parent component invoking this component: app/components/product.hbs --}}
+      <del class="small text-black-50">{{currency @price.original}}</del>
+      <i class="text-danger font-weight-bold">{{currency @price.current}}</i>
     </section>
 
-    {{!-- Color --}}
-    <div>
-      <h5>Color</h5>
-      <div class="product-colors active-{{@color}}">
-        <span class="product-color color-red" {{on "click" (fn @onChangeColor "red") }}></span>
-        <span class="product-color color-black" {{on "click" (fn @onChangeColor "black") }}></span>
+    {{#if @isDetails}}
+      {{!-- Color --}}
+      <div class="d-flex justify-content-between align-items-end">
+        <div>
+          <h5>Color</h5>
+          {{!-- @color is passed from template invoking the component: app/templates/item.hbs --}}
+          <div class="product-colors active-{{@color}}">
+            {{!-- @colors is passed from template invoking the component: app/templates/item.hbs --}}
+            {{#each @colors as |colorInfo|}}
+            <span class="product-color {{concat " color-" colorInfo.color}}" {{on "click" (fn @onChangeColor
+              colorInfo.color)}}></span>
+            {{/each}}
+          </div>
+        </div>
+        <button class="btn btn-info" type="button" {{on "click" this.addToCart}}>
+          <i class="fa fa-shopping-cart mr-1">
+            Add to cart
+          </i>
+        </button>
       </div>
-    </div>
+    {{/if}}
   </div>

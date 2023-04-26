@@ -1,3 +1,4 @@
 <div class="product-image">
-  <img src={{@src}}>
+  {{!-- @src is passed from template invoking the component: app/components/product.hbs --}}
+  <img src={{@src}} {{on "click" @toggleZoom }}>
 </div>

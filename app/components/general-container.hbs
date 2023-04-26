@@ -1,5 +1,10 @@
 <LinkTo @route="cart" class="cart-link">
   <i class="fa fa-shopping-cart"></i>
+  {{#if this.shoppingCart.itemList.length}} {{!-- this stemmed from app/service/shopping-cart.js --}}
+    <span class="cart-count d-inline-flex justify-content-center align-item-center">
+      {{this.itemCount}} {{!-- this method is from app/components/general-container.js --}}
+    </span>
+  {{/if}}
 </LinkTo>
 
 <main class="container mt-5">

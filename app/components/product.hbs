@@ -1,4 +1,11 @@
-<LinkTo @route="item" @model="1" class="product">
-  <Product::Image />
-  <Product::Details />
+<LinkTo @route="item" @model={{@product.id}} class="product">
+  <Product::Image 
+    @src={{this.productImage}} {{!-- this.productImage is sourced from the corresponding JavaScript file: app/components/product.js --}}
+    @toggleZoom={{this.toggleZoom}}
+  />
+  <Product::Details 
+    {{!-- @product is passed from the template invoking this component: app/templates/index.hbs --}}
+    @name={{@product.name}} 
+    @price={{@product.price}}
+  />
 </LinkTo>

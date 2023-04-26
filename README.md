@@ -91,6 +91,26 @@ _**Note:** This personal notes is written in addition to notes from lessons lear
 >
 > `(fn @<functionName> value)` -- when a function is envoked, the value is used to pass into the function. A full action with on clicking: `{{ on "click" (fn @<functionName> value) }}`
 
+## Ember Helpers
+
+> **Built-in Helpers:**
+>
+> - `{{ on`
+> - `{{ concat` - concat mulitple strings - `{{concat "active-" @color}}`
+> - `{{ let` - help you define a temporary variable - `{{let (concat this.firstName this.lastName) as |fullName|}}`
+>   - `{{#let}} content... {{/let}}` - for block scope
+> - `{{ if` - a conditional statement - `{{if this.isRed 'red' 'black'}}`
+>   - `{{#if}} content... {{/if}}` - for block scope
+>   - `{{#if}} content... {{else}} content... {{/if}}` - for if/else block scope
+>   - `{{#if}} content... {{else if}} content... {{/if}}` - for if/else if block scope
+> - `{{ get` - get value with given key from the object provided - `{{get this.product "name"}}` _or_ `{{get this.product this.attribute}}`
+> - `{{ hash` - allow you to create object (hash) within a template - `<Child @user={{hash firstName="Tamer" lastName="Mahmoud"}} />`
+> - `{{ unless` - basically opposite of if conditional statement
+>   - `{{#unless}} content... {{/unless}}` - for block scope
+>   - `{{#unless}} content... {{else}} content... {{/unless}}` - for unless/else block scope
+>   - `{{#unless}} content... {{else if}} content... {{/unless}}` - for unless/else if block scope
+> - `{{ each` - essentially a for loop - `{{#each list as |item|}} <li>item.attr</li> {{/each}}`
+
 ## Ember Services
 
 > In Ember, services serve a similar role to global variables, in that they can be easily accessible by any part of the app. The bigget difference from global variables, is that services are scoped to your app; instead of all the JavaScript code that's running on the same page. This allows you to have multiple scripts running on the same page without interfering with each other.
@@ -98,6 +118,8 @@ _**Note:** This personal notes is written in addition to notes from lessons lear
 ## [Ember Data](https://guides.emberjs.com/release/models/)
 
 > Ember Data store acts as a kind of intermediary between our app and the server; it does many important things, including caching the responses that were fetched from the server. If we request some records (instances of model classes) that we had _already_ fetched from the server in the past, Ember Data's store ensures that we can access the records immediately, without having to fetch them again unnecessarily and wait for the server to response. But, if we don't already have that response cached in our store, then it will go off and fetches it from the server.
+>
+> Source of Ember Data fetch are found in the `app/model/` folder
 
 ## Adapter
 
@@ -156,6 +178,19 @@ _**Note:** This personal notes is written in addition to notes from lessons lear
 > `ember generate component <name> --with-component-class`
 >
 > alt: `ember g component <name> -gc`
+
+### Helper generator
+
+> `ember g helper <name>`
+
+### Service generator
+
+> `ember g service <name>`
+
+### Adapter & Serializer generator
+> `ember g adapter <name>`
+> 
+> `ember g serializer <name>`
 
 ### Acceptance Test generator
 

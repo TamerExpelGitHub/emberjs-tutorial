@@ -1,5 +1,7 @@
-
 <GeneralContainer>
-  <Product />
-  <Product />
+  <GeneralBreadcrumb />
+  {{!-- this.model is sourced from app/routes/index.js --}}
+  {{#each this.model as |product|}}
+    <Product @product={{product}} />
+  {{/each}}
 </GeneralContainer>
