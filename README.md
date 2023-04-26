@@ -1,4 +1,4 @@
-# super-rentals
+# emberjs-tutorial
 
 This README will serve as a personal notes for myself to maintain my understanding of EmberJS.
 
@@ -11,6 +11,23 @@ _**Note:** This personal notes is written in addition to notes from lessons lear
 ## application.hbs
 
 > Considered a special template that does not have its own URL and cannot be navigated to on its own. Rather, it is used to specify a common layout that is shared by every page in your app. Excellent for site-wide UI elements like nav-bar and footer.
+
+## Ember Routing System
+
+> When creating a route `app/router.js`, two JavaScript files are created in support: `app/routes/<name>.js` and `app/controllers/<name>.js`. Both JavaScript files support the template: `app/templates/<name>.js`
+>
+> - **Application route:** `/` <- The main template
+> - **Basic route:** `this.route('<name>')` <- `/<name>`
+> - **Nested route:** `this.route('<name>', function () { this.route('<nested name>'); });` <- `/<name>/<nested name>`
+> - **Index route:** default route at a given current level <- `/<name>/<index>` === `/<name>` but with separate template
+> - **Dynamic route:** `this.route('<name>', path: {'/<name>/:id'});` <- `/<name>/1`
+> - **404 Not Found route:** `this.route('<name>', path: {'/*path'});` <- redirect any non-existing routes to `/<name>`
+
+## Route vs Controller
+
+> **Route:** `route/<name>.js` typically contain `model()` hook and can pass model to `template/<name>.hbs` and/or `controller/<name>.js`
+>
+> **Controller:** `controller/<name>.js` typically contain properties and actions
 
 ## LinkTo
 
@@ -36,13 +53,25 @@ _**Note:** This personal notes is written in addition to notes from lessons lear
 
 > Allow you to optionally associate JavaScript code with a component -- in this case a glimmer component class. Essentially a source code (js) for the supporting component. i.e. `app/component/rental/image.hbs` & `app/component/rental/image.js`
 
+## Properties & Arguments
+
+> **Property** is the variable defined within the current class
+>
+> **Argument** is something passed from parent component
+>
+> Argument used `@` sign before the property: `<Child @propB={{this.propB}} />` (`this.probB` is sourced from property in corresponding JavaScript file)
+>
+> _Example:_ `child.hbs` -- from a parent component: `{{@probB}}` (sourced from argument above)
+>
+> _Example:_ `child.hbs` -- in a child component: `{{this.probA}}` (sourced from property in corresponding JavaScript file)
+
 ## Glimmer component
 
 > One of the serveral component classes available in Ember. Learn more about [Glimmer Component](https://guides.emberjs.com/release/upgrading/current-edition/glimmer-components/).
 
 ## Ember [decorator](https://guides.emberjs.com/release/in-depth-topics/native-classes-in-depth/#toc_decorators)
 
-> User defined modifiers that can be applied to a class or class element such as field or method to change its behavior.
+> User defined modifiers that can be applied to a class or class element such as field or method to change its behavior. Can be used within component or controller.
 
 ### `@tracked`
 
@@ -59,6 +88,8 @@ _**Note:** This personal notes is written in addition to notes from lessons lear
 ## Ember [modifier](https://guides.emberjs.com/release/components/template-lifecycle-dom-and-modifiers/#toc_event-handlers)
 
 > Event handler (i.e.: `{{ on ... }}`) added to an HTML element. Operate by passing the element to a function that can do anything with it.
+>
+> `(fn @<functionName> value)` -- when a function is envoked, the value is used to pass into the function. A full action with on clicking: `{{ on "click" (fn @<functionName> value) }}`
 
 ## Ember Services
 
@@ -84,17 +115,27 @@ _**Note:** This personal notes is written in addition to notes from lessons lear
 >
 > Automated testing URL: [`http://localhost:7357/`](http://localhost:7357/)
 >
-> **Acceptance testing** test the _work flow_ of an application. Since a page can take time to load, we use `async/await` to ensure that each step wait its turn before moving on.
+> - **Acceptance test:** test the _work flow_ of an application. Since a page can take time to load, we use `async/await` to ensure that each step wait its turn before moving on.
 >
-> **Component test**, also known as rendering (integration) test used to render and test a single component at a time.
+> - **Component test:**, also known as rendering (integration) test used to render and test a single component at a time.
 >
-> **Unit test** doesn't actually render anything. It instantiates the model object and tests the model object directly, manipulating its attributes and asserting their value.
+> - **Unit test:** doesn't actually render anything. It instantiates the model object and tests the model object directly, manipulating its attributes and asserting their value.
 >
 > `beforeEach` is a hook used to share boilerplate code, that allows you to have two tests that each focus on different, single aspect of the component. `beforeEach` runs once before each test function which is an ideal place to set up anything that might be needed by all test cases in the file.
 
 ## Ember Generators
 
 > Typically written as `ember generate <type> <name>` or `ember g <type> <name>`.
+
+### Route generator
+
+> `ember generate route <name>`
+>
+> `ember generate route <name>/<nested name>`
+
+### Controller generator
+
+> `ember generate controller <name>`
 
 ### Component generator
 
